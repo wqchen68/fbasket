@@ -1,0 +1,37 @@
+t_teamName2id <- function(teamName){
+  teamId <- switch(teamName,
+                   "Toronto"      = "tor",
+                   "Boston"       = "bos",
+                   "Brooklyn"     = "bro",
+                   "New York"     = "nyk",
+                   "Philadelphia" = "phi",
+                   "Chicago"      = "chi",
+                   "Cleveland"    = "cle",
+                   "Detroit"      = "det",
+                   "Indiana"      = "ind",
+                   "Milwaukee"    = "mil",
+                   "Atlanta"      = "atl",
+                   "Charlotte"    = "cha",
+                   "Miami"        = "mia",
+                   "Orlando"      = "orl",
+                   "Washington"   = "was",
+                   "LA Clippers"  = "lac",
+                   "LA Lakers"    = "lal",
+                   "Phoenix"      = "pho",
+                   "Sacramento"   = "sac",
+                   "Golden State" = "gsw",
+                   "New Orleans"  = "nor",
+                   "Houston"      = "hou",
+                   "Memphis"      = "mem",
+                   "San Antonio"  = "sas",
+                   "Dallas"       = "dal",
+                   "Denver"       = "den",
+                   "Minnesota"    = "min",
+                   "Oklahoma City"= "okc",
+                   "Portland"     = "por",
+                   "Utah"         = "uth",
+  )
+}
+
+
+

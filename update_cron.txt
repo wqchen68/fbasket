@@ -1,0 +1,1 @@
+10 0 * * * Rscript /home/chengil/R/fansboard/f_checkFirstGame.R
