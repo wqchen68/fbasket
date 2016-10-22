@@ -4,7 +4,7 @@ f_realtimebox <- function(gameid, type){
   library(dplyr)
   library(stringr)
   library(jsonlite)
-  library(rvest)
+  # library(rvest)
   BoxScroePR <- NULL
   BoxScroeTM <- NULL
   ### get api
@@ -55,7 +55,7 @@ f_realtimebox <- function(gameid, type){
     oncourt <- ifelse(oncourt==1, "on-court", "")
     
     ### get html
-    htmlstr <- paste0('http://sports.yahoo.com/nba/', gameid) %>% read_html()
+    # htmlstr <- paste0('http://sports.yahoo.com/nba/', gameid) %>% read_html()
     
     gamedate <- str_split(gameid, "-") %>% unlist() %>% tail(1) %>% substr(1,8)
     season   <- ifelse(as.integer(substr(gamedate,5,6)) < 7,as.character(as.integer(substr(gamedate,1,4))-1),substr(gamedate,1,4))
