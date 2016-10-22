@@ -1,7 +1,6 @@
-# f_realtimebox <- function(gameid, type){
-  gameid <- "new-orleans-pelicans-orlando-magic-2016102019"
-  # gameid <- "new-york-knicks-boston-celtics-2016101902"
-  type <- 1
+f_realtimebox <- function(gameid, type){
+  # gameid <- "toronto-raptors-washington-wizards-2016102127"
+  # type <- 1
   library(dplyr)
   library(stringr)
   library(jsonlite)
@@ -62,10 +61,13 @@
     season   <- ifelse(as.integer(substr(gamedate,5,6)) < 7,as.character(as.integer(substr(gamedate,1,4))-1),substr(gamedate,1,4))
     source("/home/chengil/R/fbasket/t_teamName2id.R")
   
-    team <- htmlstr %>%
-      html_nodes(xpath = "//*[@id='Col1-0-Boxscore']/div[1]/div[3]/div/div/div/div/div[2]/div[1]/a/span") %>%
-      html_text() %>% lapply(t_teamName2id) %>% unlist()
-    
+    # team <- htmlstr %>%
+    #   html_nodes(xpath = "//*[@id='Col1-0-Boxscore']/div[1]/div[3]/div/div/div/div/div[2]/div[1]/a/span") %>%
+    #   html_text() %>% lapply(t_teamName2id) %>% unlist()
+
+    team <- c(eval(parse(text=paste0("df$service$boxscore$games$nba.g.", gameid_short, "$away_team_id"))),
+              eval(parse(text=paste0("df$service$boxscore$games$nba.g.", gameid_short, "$home_team_id")))) %>% lapply(t_teamName2id) %>% unlist()
+        
     oppo     <- c(paste0('@',team[2]),team[1])
     score1    <- c(paste0(boxtm$PPG[1], "-", boxtm$PPG[2])) # game score, LIVE!
     score2    <- c(paste0(boxtm$PPG[2], "-", boxtm$PPG[1])) # -1 score, LIVE!
@@ -192,4 +194,4 @@
     # print("progress")
     return(list(BoxScroeTM = data.frame(BoxScroeTM), BoxScroePR = data.frame(BoxScroePR)))
   }
-# }
+}

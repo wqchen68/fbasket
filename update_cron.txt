@@ -1,1 +1,1 @@
-0 7 * * * Rscript /home/chengil/R/fbasket/realtimebox.R &> /home/chengil/R/fbasket/realtimebox.log
+NA NA * * * Rscript /home/chengil/R/fbasket/realtimebox.R &> /home/chengil/R/fbasket/realtimebox.log
