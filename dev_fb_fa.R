@@ -59,6 +59,9 @@ f_getfbdata_pr <- function(l_id, cates){
 # Load the function above, and Execute the script below
 l_id <- '2827'
 cates <- c('OREB','DREB','ST')
+# please refer to ...
+# '2827'  = c('FG', 'FT', '3PTA', 'OREB', 'DREB', 'ST', 'BLK', 'ATR', 'TECH')
+# '5547'  = c('FG', 'FT', '3PTM', 'PTS', 'REB', 'AST', 'ST', 'BLK', 'TO')
 
 f_getfbdata_pr(l_id, cates)
 
