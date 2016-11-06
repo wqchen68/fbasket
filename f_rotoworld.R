@@ -1,5 +1,5 @@
 f_rotoworld <- function(rwid){
-  # rwid <- "1272"
+  # rwid <- "1772"
   library(rvest)
   htmlstr <- read_html(paste0("http://www.rotoworld.com/player/nba/", rwid))
   
@@ -19,7 +19,7 @@ f_rotoworld <- function(rwid){
   
   pr_news$info <- htmlstr %>% 
     html_nodes(xpath = "//*[@class='playernews']//*[@class='source']") %>%
-    html_children() %>% .[2] %>% as.character()
+    html_text() %>% .[1]
   
   return(data.frame(pr_news))
 
