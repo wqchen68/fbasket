@@ -11,7 +11,7 @@ dbDisconnect(con)
 htmlstr <- read_html(paste0("http://sports.yahoo.com/nba/scoreboard/?dateRange=",Sys.Date()-1))
 
 gameid <- htmlstr %>%
-  html_nodes(xpath = "//*[@id='scoreboard-group-2']/div/ul/li/div/div/a") %>%
+  html_nodes(xpath = "//*[@id='scoreboard-group-2']/div/ul/li/div/div[1]/a") %>%
   html_attr("href") %>%
   str_split("/") %>%  #"/nba/golden-state-warriors-toronto-raptors-2016100128/"
   sapply(function(x) x[3])
@@ -62,15 +62,15 @@ close(fileConn)
 system("crontab /home/chengil/R/fbasket/update_cron.txt")
 
 
-# Sys.sleep(3); source("/home/chengil/R/fbasket/f_realtimebox2gamelog.R")
-# Sys.sleep(3); source("/home/chengil/R/fbasket/f_gamelog2dataframe.R")
-#   Sys.sleep(3); f_gamelog2dataframe('ALL')
-#   Sys.sleep(3); f_gamelog2dataframe('D30')
-#   Sys.sleep(3); f_gamelog2dataframe('D14')
-#   Sys.sleep(3); f_gamelog2dataframe('D07')
-# Sys.sleep(3); source("/home/chengil/R/fbasket/D_cate9ms.R")
-# Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncplayerlist.R") #fantasy: ALL
-# Sys.sleep(3)
+Sys.sleep(3); source("/home/chengil/R/fbasket/f_realtimebox2gamelog.R")
+Sys.sleep(3); source("/home/chengil/R/fbasket/f_gamelog2dataframe.R")
+  Sys.sleep(3); f_gamelog2dataframe('ALL')
+  Sys.sleep(3); f_gamelog2dataframe('D30')
+  Sys.sleep(3); f_gamelog2dataframe('D14')
+  Sys.sleep(3); f_gamelog2dataframe('D07')
+Sys.sleep(3); source("/home/chengil/R/fbasket/D_cate9ms.R")
+Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncplayerlist.R") #fantasy: ALL
+Sys.sleep(3)
 
 
 # # temp query
