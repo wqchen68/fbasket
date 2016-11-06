@@ -12,9 +12,6 @@ f_gamelog2dataframe = function(datarange){
   gamelog <- dbGetQuery(con, paste0("SELECT * FROM allgamelog
                          WHERE season='2016' AND bxgs IS NOT NULL
                          AND TO_DAYS( NOW( ) ) - TO_DAYS( gdate ) <=",days))
-  # gamelog <- dbGetQuery(con, paste0("SELECT * FROM allgamelog 
-  #                        WHERE season='2015' AND bxgs IS NOT NULL 
-  #                        AND gdate <= '2016-03-01'"))  
   dbDisconnect(con)
 
   # source('/home/chengil/R/fansboard/f_dbconnect.R')

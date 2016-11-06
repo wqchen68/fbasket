@@ -20,7 +20,7 @@ for (i in 1:length(adddate)){
   htmlstr <- read_html(paste0("http://sports.yahoo.com/nba/scoreboard/?dateRange=", adddate[i]))
   
   gameid <- htmlstr %>%
-    html_nodes(xpath = "//*[@id='scoreboard-group-2']/div/ul/li/div/div/a") %>%
+    html_nodes(xpath = "//*[@id='scoreboard-group-2']/div/ul/li/div/div[1]/a") %>%
     html_attr("href") %>%
     str_split("/") %>%  #"/nba/golden-state-warriors-toronto-raptors-2016100128/"
     sapply(function(x) x[3])
@@ -38,7 +38,7 @@ for (i in 1:length(adddate)){
         break
       }
     }
-    colnames(BoxScroePRALL)[colnames(BoxScroePRALL)=="gamedate"] <- "gdate"
+    colnames(BoxScroePRALL)[colnames(BoxScroePRALL)=="gamedate"] <- "gdate" #just for html naming
     colnames(BoxScroePRALL)[colnames(BoxScroePRALL)=="oppo"] <- "goppo"
     BoxScroePRALL <- subset(BoxScroePRALL, select = -c(szv, oncourt, livemark)) #allgamelog no need
 

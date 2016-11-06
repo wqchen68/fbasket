@@ -1,7 +1,7 @@
 ##### 每天更新 cate9ms #####
 rm(list=ls())
 library(dplyr)
-source("/home/chengil/R/fansboard/f_dbconnect.R")
+source("/home/chengil/R/fbasket/f_dbconnect.R")
 dbGetQuery(con, "TRUNCATE cate9ms")
 query <- paste0("
   select 

@@ -53,7 +53,7 @@ repeat{
 }
 
 source('/home/chengil/R/fbasket/f_dbconnect.R')
-dbGetQuery(con, "update realtimeeff set oncourt = ''") # clear on-court
+dbGetQuery(con, "update realtimeeff set oncourt = ''") # clear on-court, because timimg different
 dbDisconnect(con)  
 
 fileConn<-file("/home/chengil/R/fbasket/update_cron.txt")
