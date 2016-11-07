@@ -43,9 +43,9 @@ f_getfbdata <- function(page, league_id){
 
 
 f_getfbdata_pr <- function(l_id, cates){
-  # l_id <- '2827'
-  # cates <- c('OREB','DREB')
-  cates_sum_str = paste(paste('all_pr_data$', cates),sep="+")
+  l_id <- '2827'
+  cates <- c('OREB','DREB')
+  cates_sum_str = paste0(paste('all_pr_data$', cates, sep=""), collapse="+")
   
   page <- seq(0,500,25) # depend on deep of your league
   all_pr_data <- lapply(page, f_getfbdata, league_id=l_id) %>% bind_rows()
