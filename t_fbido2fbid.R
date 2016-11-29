@@ -1,3 +1,5 @@
+# > t_fbido2fbid('3704')
+# [1] "LeBron-James"
 t_fbido2fbid = function(fbido_in){
   # fbido_in <- "5253"
   # fbido_in <- "900012"
