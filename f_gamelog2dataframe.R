@@ -1,7 +1,7 @@
 f_gamelog2dataframe = function(datarange){
   
   library(dplyr)
-  # datarange <- "D07"
+  datarange <- "ALL"
   days <- switch(datarange,
          "ALL" = 365,
          "D30" = 30,
