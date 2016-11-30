@@ -5,7 +5,7 @@ f_getcareerstats <- function(fbido){
   library(rvest)
   library(stringr)
   
-  fbido <- '3331'
+  # fbido <- '3331'
   htmlstr <- read_html(paste0("http://sports.yahoo.com/nba/players/", fbido))
   
   source('/home/chengil/R/fbasket/t_fbido2fbid.R')
