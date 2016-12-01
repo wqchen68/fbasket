@@ -3,7 +3,8 @@ f_getbiodata = function(fbido){
   library(RCurl)
   library(RMySQL)
   bio_data <- NULL
-  # fbido <- '5257'
+  # fbido <- '1250'
+  # fbido <- '3704'
   sethtml  <- readLines(paste0("http://sports.yahoo.com/nba/players/", fbido),warn=F,encoding = "UTF-8")
   pagetree <- htmlTreeParse(sethtml, useInternalNodes = TRUE, encoding='UTF-8')
   bio_data$fbido  <- fbido
@@ -11,8 +12,13 @@ f_getbiodata = function(fbido){
   source('/home/chengil/R/fbasket/t_player2fbid.R')
   bio_data$fbid <- t_player2fbid(bio_data$player)
   numpos <- xpathSApply(pagetree,'//span[@class="team-info"]',xmlValue) %>% strsplit(",") %>% unlist()
+  if (length(numpos)==3){
     bio_data$number   <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
     bio_data$position <- numpos[2] %>% trimws("left")
+  }else{
+    bio_data$number   <- NULL
+    bio_data$position <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
+  }
   bio_data$height  <- xpathSApply(pagetree,'//li[@class="height"]//dd',xmlValue)
   bio_data$weight  <- xpathSApply(pagetree,'//li[@class="weight"]//dd',xmlValue)
   bio_data$bornD   <- xpathSApply(pagetree,'//li[@class="born"]//dd',xmlValue)
@@ -32,7 +38,13 @@ f_getbiodata = function(fbido){
     bio_data$draftT <- strsplit(draft, " by the ") %>% unlist %>% tail(1)
   }
   bio_data$fbido2  <- as.numeric(fbido)
-  return(data.frame(bio_data))
+  # return(data.frame(bio_data))
+  
+  biodata <- data.frame(bio_data)
+  source("/home/chengil/R/fbasket/f_dbconnect.R")
+  dbWriteTable(con, 'biodata_copy', biodata, append = T, row.names = F, allow.keywords = T)
+  dbDisconnect(con)
+  
 }
 
 # BioData=[fbido player number fbid position height weight bornD bplace college draftY draftR draftP draftT]
