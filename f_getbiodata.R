@@ -3,8 +3,9 @@ f_getbiodata = function(fbido){
   library(RCurl)
   library(RMySQL)
   bio_data <- NULL
-  # fbido <- '1250'
-  # fbido <- '3704'
+  # fbido <- '3704' #normal
+  # fbido <- '1250' #no number
+  # fbido <- '2874' #no nmber, position
   sethtml  <- readLines(paste0("http://sports.yahoo.com/nba/players/", fbido),warn=F,encoding = "UTF-8")
   pagetree <- htmlTreeParse(sethtml, useInternalNodes = TRUE, encoding='UTF-8')
   bio_data$fbido  <- fbido
@@ -15,9 +16,12 @@ f_getbiodata = function(fbido){
   if (length(numpos)==3){
     bio_data$number   <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
     bio_data$position <- numpos[2] %>% trimws("left")
-  }else{
+  }else if(length(numpos)==2){
     bio_data$number   <- NULL
     bio_data$position <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
+  }else{
+    bio_data$number   <- NULL
+    bio_data$position <- NULL
   }
   bio_data$height  <- xpathSApply(pagetree,'//li[@class="height"]//dd',xmlValue)
   bio_data$weight  <- xpathSApply(pagetree,'//li[@class="weight"]//dd',xmlValue)
