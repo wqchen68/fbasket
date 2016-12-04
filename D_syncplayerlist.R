@@ -5,18 +5,18 @@ f_syncplayerlist <- function(datarange){
   library(RCurl)
   FULLplayerlistO <- NULL
   PrList <- NULL
-  # datarange <- "FULL"
+  # datarange <- "ALL"
   datarange_url <- switch(datarange, 
                           "ALL"  = "S_S_2016",
-                          "FULL" = "S_S_2016",
+                          "Full" = "S_S_2016",
                           "D30"  = "S_L30",
                           "D14"  = "S_L14",
                           "D07"  = "S_L7",
                           "Y-1"  = "S_S_2015",
                           "Y-2"  = "S_S_2014")
   for (i in seq(0, 625, 25)){
-    # i <- 475
-    sethtml <- readLines(paste0("http://basketball.fantasysports.yahoo.com/nba/8759/players?status=ALL&pos=P&cut_type=33&stat1=", datarange_url, "&myteam=0&sort=OR&sdir=1&count=", toString(i)), warn=F, encoding="UTF-8")
+    # i <- 0
+    sethtml <- readLines(curl(paste0("http://basketball.fantasysports.yahoo.com/nba/8759/players?status=ALL&pos=P&cut_type=33&stat1=", datarange_url, "&myteam=0&sort=OR&sdir=1&count=", toString(i))), warn=F, encoding="UTF-8")
     pagetree <- htmlTreeParse(sethtml, useInternalNodes = TRUE, encoding='UTF-8')
   
     PrList$datarange <- datarange
@@ -30,7 +30,7 @@ f_syncplayerlist <- function(datarange){
     PrList$injna   <- xpathSApply(pagetree,'//span[@class="ysf-player-status F-injury Fz-xxs Grid-u Lh-xs"]', xmlValue)
     PrList$orank   <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Nowrap Selected"]', xmlValue) %>% as.numeric()
     arank          <- xpathSApply(pagetree,'//td[@class="Ta-end Bdrend"]', xmlValue)
-    arank          <- matrix(arank,3,) %>% t()
+    arank          <- matrix(arank,4,) %>% t()
     PrList$arank   <- as.numeric(arank[,1])
     owned          <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Nowrap Bdrend"]', xmlValue)
     PrList$owned   <- sub("%","",owned)
@@ -51,7 +51,7 @@ f_syncplayerlist <- function(datarange){
 }
 
 f_syncplayerlist('ALL')
-f_syncplayerlist('FULL')
+f_syncplayerlist('Full')
 f_syncplayerlist('D30')
 f_syncplayerlist('D14')
 f_syncplayerlist('D07')

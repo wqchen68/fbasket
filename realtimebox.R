@@ -69,7 +69,7 @@ Sys.sleep(3); source("/home/chengil/R/fbasket/f_gamelog2dataframe.R")
   Sys.sleep(3); f_gamelog2dataframe('D14')
   Sys.sleep(3); f_gamelog2dataframe('D07')
 Sys.sleep(3); source("/home/chengil/R/fbasket/D_cate9ms.R")
-# Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncplayerlist.R")
+Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncplayerlist.R")
 Sys.sleep(3); source("/home/chengil/R/fbasket/D_FB2biodata.R")
 Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncRWpr.R")
 
