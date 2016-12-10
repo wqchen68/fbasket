@@ -30,7 +30,7 @@ f_syncplayerlist <- function(datarange){
     PrList$injna   <- xpathSApply(pagetree,'//span[@class="ysf-player-status F-injury Fz-xxs Grid-u Lh-xs"]', xmlValue)
     PrList$orank   <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Nowrap Selected"]', xmlValue) %>% as.numeric()
     arank          <- xpathSApply(pagetree,'//td[@class="Ta-end Bdrend"]', xmlValue)
-    arank          <- matrix(arank,4,) %>% t()
+    arank          <- matrix(arank,3,) %>% t()
     PrList$arank   <- as.numeric(arank[,1])
     owned          <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Nowrap Bdrend"]', xmlValue)
     PrList$owned   <- sub("%","",owned)
@@ -52,10 +52,10 @@ f_syncplayerlist <- function(datarange){
 
 f_syncplayerlist('ALL')
 f_syncplayerlist('Full')
-f_syncplayerlist('D30')
-f_syncplayerlist('D14')
-f_syncplayerlist('D07')
-f_syncplayerlist('Y-1')
-f_syncplayerlist('Y-2')
+# f_syncplayerlist('D30')
+# f_syncplayerlist('D14')
+# f_syncplayerlist('D07')
+# f_syncplayerlist('Y-1')
+# f_syncplayerlist('Y-2')
 
 
