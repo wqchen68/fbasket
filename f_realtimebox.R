@@ -1,6 +1,6 @@
 f_realtimebox <- function(gameid, type){
-  gameid <- "phoenix-suns-los-angeles-lakers-2016120913"
-  type <- 2
+  # gameid <- "phoenix-suns-los-angeles-lakers-2016120913"
+  # type <- 2
   library(dplyr)
   library(tibble)
   library(magrittr)
