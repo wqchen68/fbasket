@@ -1,6 +1,6 @@
 f_realtimebox <- function(gameid, type){
-  # gameid <- "sacramento-kings-philadelphia-76ers-2016113020"
-  # type <- 2
+  gameid <- "phoenix-suns-los-angeles-lakers-2016120913"
+  type <- 2
   library(dplyr)
   library(tibble)
   library(magrittr)
@@ -196,8 +196,10 @@ f_realtimebox <- function(gameid, type){
     adjft <- (BoxScroePR$bxftm/BoxScroePR$bxfta-cate9ms$percentage[2])*BoxScroePR$bxfta
     boxcate9 <- cbind(adjfg,adjft,BoxScroePR$bx3ptm,BoxScroePR$bxpts,BoxScroePR$bxtreb,BoxScroePR$bxast,BoxScroePR$bxst,BoxScroePR$bxblk,-BoxScroePR$bxto)
     BoxScroePR$szv <- colSums((t(boxcate9)-cate9ms$mean)/cate9ms$std, na.rm=T)
-    
+    BoxScroeTM <- data.frame(BoxScroeTM)
+    BoxScroePR <- data.frame(BoxScroePR)
+    BoxScroePR <- BoxScroePR %>% filter(fbid != "ERROR")
     # print("progress")
-    return(list(BoxScroeTM = data.frame(BoxScroeTM), BoxScroePR = data.frame(BoxScroePR)))
+    return(list(BoxScroeTM, BoxScroePR))
   }
 }
