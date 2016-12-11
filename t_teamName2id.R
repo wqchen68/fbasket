@@ -1,3 +1,7 @@
+# Convert team id (api) to team id (DB)
+# Example:
+# > t_teamName2id("nba.t.1")
+# [1] "atl"
 t_teamName2id <- function(teamName){
   teamId <- switch(teamName,
                    "nba.t.1"  = "atl",
@@ -61,6 +65,7 @@ t_teamName2id <- function(teamName){
                    # "Portland"     = "por",
                    # "Utah"         = "uth"
   )
+  return(teamId)
 }
 
 

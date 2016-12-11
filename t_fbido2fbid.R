@@ -1,3 +1,5 @@
+# Convert fbido (origin) to fbid (DB)
+# Example:
 # > t_fbido2fbid('3704')
 # [1] "LeBron-James"
 t_fbido2fbid = function(fbido_in){
