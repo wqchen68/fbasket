@@ -2,7 +2,7 @@
 rm(list=ls())
 source("/home/chengil/R/fbasket/f_dbconnect.R")
 
-sprlist_id <- dbGetQuery(con, "SELECT fbido FROM syncplayerlist WHERE datarange='FULL'")
+sprlist_id <- dbGetQuery(con, "SELECT fbido FROM syncplayerlist WHERE datarange='Full'")
 biodata_id <- dbGetQuery(con, "SELECT fbido FROM biodata")
 dbDisconnect(con)
 

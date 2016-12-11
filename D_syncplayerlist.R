@@ -50,12 +50,4 @@ f_syncplayerlist <- function(datarange){
   dbDisconnect(con)
 }
 
-f_syncplayerlist('ALL')
-f_syncplayerlist('Full')
-# f_syncplayerlist('D30')
-# f_syncplayerlist('D14')
-# f_syncplayerlist('D07')
-# f_syncplayerlist('Y-1')
-# f_syncplayerlist('Y-2')
-
 

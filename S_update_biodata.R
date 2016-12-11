@@ -26,3 +26,16 @@ biodata <- lapply(all_bio, function(x){
 
 
 
+# some sql scripts of adjustment for DB
+# select *
+# from biodata_copy
+# where number = "\n"
+# 
+# UPDATE biodata_copy SET number=NULL WHERE number='\n';
+
+# select *
+#   from biodata_copy
+# where length(position) > 2
+# 
+# UPDATE biodata_copy SET position=NULL WHERE length(position) > 2;
+
