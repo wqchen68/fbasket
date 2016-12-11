@@ -5,6 +5,7 @@ f_getcareerstats <- function(fbido){
   library(rvest)
   library(stringr)
   
+  # fbido <- '113'
   # fbido <- '3331'
   # fbido <- '3705'
   htmlstr <- read_html(paste0("http://sports.yahoo.com/nba/players/", fbido))
@@ -40,11 +41,11 @@ f_getcareerstats <- function(fbido){
   
   new_order <- 1:nrow(careerStats0)
   dataorder <- 1:nrow(careerStats0)
-  if (nrow(careerStats0) > 2){
-    for (i in 2:(nrow(careerStats0)-1)){
+  if (nrow(careerStats0) > 3){ # 至少要 4 rows，因為下面有個條件會檢查前兩年、有個條件會檢查後一年
+    for (i in 3:(nrow(careerStats0)-1)){
       # print(i)
       if (careerStats0$cseason[i] == careerStats0$cseason[i-1]){ # 年份相同
-        if (careerStats0$cteam[i-1] == careerStats0$cteam[i+1]){ # 前一年球隊相同
+        if (careerStats0$cteam[i-1] == careerStats0$cteam[i+1] | careerStats0$cteam[i] == careerStats0$cteam[i-2]){ # 兩個條件
           new_order[i] <- dataorder[i-1]
           new_order[i-1] <- dataorder[i]
         }
