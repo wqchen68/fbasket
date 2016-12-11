@@ -5,7 +5,7 @@ f_getcareerstats <- function(fbido){
   library(rvest)
   library(stringr)
   
-  # fbido <- '3331'
+  # fbido <- '3705'
   htmlstr <- read_html(paste0("http://sports.yahoo.com/nba/players/", fbido))
   
   source('/home/chengil/R/fbasket/t_fbido2fbid.R')
@@ -38,7 +38,9 @@ f_getcareerstats <- function(fbido){
     mutate(ceff36 = ceff/cmin*36) %>%
     mutate(dataorder = 1:length(cseason))
   
-  careerStats <- careerStats[order(careerStats$cseason, factor(careerStats$cteam, levels = unique(careerStats$cteam))),]
+  careerStats1 <- careerStats[order(careerStats$cseason, factor(careerStats$cteam, levels = unique(careerStats$cteam))),]
+  careerStats2 <- careerStats1[order(careerStats1$cseason, rev(factor(careerStats1$cteam, levels = unique(careerStats1$cteam))), decreasing=T),]
+  careerStats <- careerStats2[nrow(careerStats2):1,]
   
   add_prime <- function(x){
     rle_len <- rle(x)[1]$lengths
