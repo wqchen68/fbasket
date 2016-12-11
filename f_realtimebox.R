@@ -200,6 +200,6 @@ f_realtimebox <- function(gameid, type){
     BoxScroePR <- data.frame(BoxScroePR)
     BoxScroePR <- BoxScroePR %>% filter(fbid != "ERROR")
     # print("progress")
-    return(list(BoxScroeTM, BoxScroePR))
+    return(list(BoxScroeTM=BoxScroeTM, BoxScroePR=BoxScroePR))
   }
 }
