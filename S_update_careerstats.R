@@ -24,7 +24,14 @@ careerstats <- lapply(all_fbido$fbido, function(x){
   })
 })
 
-
+# SQL - check
+# select a.fbido, a.fbid, b.fbido, b.fbid, b.cnt
+# from biodata a
+# left join (
+#   select fbido, fbid, count(*) as cnt
+#   from careerstats_copy
+#   group by fbido
+# ) b on a.fbido = b.fbido
 
 
 # source("/home/chengil/R/fbasket/f_dbconnect.R")

@@ -41,14 +41,28 @@ f_getcareerstats <- function(fbido){
   
   new_order <- 1:nrow(careerStats0)
   dataorder <- 1:nrow(careerStats0)
-  if (nrow(careerStats0) > 3){ # 至少要 4 rows，因為下面有個條件會檢查前兩年、有個條件會檢查後一年
-    for (i in 3:(nrow(careerStats0)-1)){
+  if (nrow(careerStats0) > 2){ # 至少要 3 rows，因為下面有個條件會檢查前兩年、有個條件會檢查後一年
+    for (i in 2:(nrow(careerStats0))){
       # print(i)
       if (careerStats0$cseason[i] == careerStats0$cseason[i-1]){ # 年份相同
-        if (careerStats0$cteam[i-1] == careerStats0$cteam[i+1] | careerStats0$cteam[i] == careerStats0$cteam[i-2]){ # 兩個條件
-          new_order[i] <- dataorder[i-1]
-          new_order[i-1] <- dataorder[i]
+
+        if (i==2){ # 檢查第二列
+          if (careerStats0$cteam[i-1] == careerStats0$cteam[i+1]){ # 只能一個條件
+            new_order[i] <- dataorder[i-1]
+            new_order[i-1] <- dataorder[i]
+          }
+        }else if (i == nrow(careerStats0)) { # 檢查最後一列
+          if (careerStats0$cteam[i] == careerStats0$cteam[i-2]){ # 只能一個條件 case: "3727"
+            new_order[i] <- dataorder[i-1]
+            new_order[i-1] <- dataorder[i]
+          }
+        }else{
+          if (careerStats0$cteam[i-1] == careerStats0$cteam[i+1] | careerStats0$cteam[i] == careerStats0$cteam[i-2]){ # 兩個條件
+            new_order[i] <- dataorder[i-1]
+            new_order[i-1] <- dataorder[i]
+          }          
         }
+        
       }
     }
   }
@@ -70,11 +84,11 @@ f_getcareerstats <- function(fbido){
     add_prime() %>% 
     add_prime()
   
-  source("/home/chengil/R/fbasket/f_dbconnect.R")
-  dbWriteTable(con, 'careerstats_copy', careerStats, append = T, row.names = F, allow.keywords = T)
-  dbDisconnect(con)
+  # source("/home/chengil/R/fbasket/f_dbconnect.R")
+  # dbWriteTable(con, 'careerstats_copy', careerStats, append = T, row.names = F, allow.keywords = T)
+  # dbDisconnect(con)
   
-  # return(careerStats)
+  return(careerStats)
   
 }
 
