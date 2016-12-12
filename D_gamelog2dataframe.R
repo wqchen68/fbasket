@@ -1,4 +1,4 @@
-f_gamelog2dataframe = function(datarange){
+D_gamelog2dataframe = function(datarange){
   
   library(dplyr)
   # datarange <- "ALL"

@@ -1,5 +1,5 @@
 ##### 每天更新 syncplayerlist #####
-f_syncplayerlist <- function(datarange){
+D_syncplayerlist <- function(datarange){
   library(dplyr)
   library(XML)
   library(RCurl)
