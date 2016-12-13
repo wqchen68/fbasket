@@ -9,7 +9,7 @@ dbDisconnect(con)
 diff_bio <- setdiff(sprlist_id$fbido, biodata_id$fbido)
 
 source("/home/chengil/R/fbasket/f_getbiodata.R")
-biodata <- do.call(rbind, lapply(diff_bio, f_getbiodata))
+biodata <- do.call(rbind, lapply(diff_bio, f_getbiodata)) %>% data.frame()
 
 source("/home/chengil/R/fbasket/f_dbconnect.R")
 dbWriteTable(con, 'biodata', biodata, append = T, row.names = F, allow.keywords = T)

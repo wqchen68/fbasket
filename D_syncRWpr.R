@@ -30,7 +30,7 @@ df_rw_add$fbid <- t_player2fbid(df_rw_add$player)
 
 # gen fbido
 source('/home/chengil/R/fbasket/f_dbconnect.R')
-syncplayerlist <- dbGetQuery(con, "SELECT fbido, fbid FROM syncplayerlist where datarange = 'FULL'")
+syncplayerlist <- dbGetQuery(con, "SELECT fbido, fbid FROM syncplayerlist where datarange = 'Full'")
 dbDisconnect(con)
 
 df_rw_add_manual <- df_rw_add %>%

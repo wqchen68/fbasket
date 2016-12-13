@@ -2,6 +2,7 @@
 D_syncplayerlist <- function(datarange){
   library(dplyr)
   library(XML)
+  library(curl)
   library(RCurl)
   FULLplayerlistO <- NULL
   PrList <- NULL
