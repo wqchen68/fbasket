@@ -8,6 +8,7 @@ D_syncplayerlist <- function(datarange){
   PrList <- NULL
   # datarange <- "ALL"
   datarange_url <- switch(datarange, 
+                          "avg"  = "S_AS_2016",
                           "ALL"  = "S_S_2016",
                           "Full" = "S_S_2016",
                           "D30"  = "S_L30",
