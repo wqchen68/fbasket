@@ -84,11 +84,11 @@ f_getcareerstats <- function(fbido){
     add_prime() %>% 
     add_prime()
   
-  # source("/home/chengil/R/fbasket/f_dbconnect.R")
-  # dbWriteTable(con, 'careerstats_copy', careerStats, append = T, row.names = F, allow.keywords = T)
-  # dbDisconnect(con)
+  source("/home/chengil/R/fbasket/f_dbconnect.R")
+  dbWriteTable(con, 'careerstats_copy', careerStats, append = T, row.names = F, allow.keywords = T)
+  dbDisconnect(con)
   
-  return(careerStats)
+  # return(careerStats)
   
 }
 
