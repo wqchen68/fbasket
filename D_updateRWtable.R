@@ -1,5 +1,6 @@
 # 每天晚上 23:00 ~ 08:00 每小時更新 player news (rwtable)
 rm(list=ls())
+library(dplyr)
 source("/home/chengil/R/fbasket/f_dbconnect.R")
 prlist_id <- dbGetQuery(con, "SELECT fbido FROM syncplayerlist WHERE datarange='Full'")
 rwlist_id <- dbGetQuery(con, "SELECT fbido, fbid, player, rwid FROM rwtable")
