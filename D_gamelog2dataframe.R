@@ -100,8 +100,12 @@ D_gamelog2dataframe = function(datarange){
   dbGetQuery(con, paste0("DELETE FROM syncdataframe WHERE datarange='", datarange, "'"))
   dbWriteTable(con, 'syncdataframe', df_all, append = T, row.names = F, allow.keywords = T)
   dbDisconnect(con)
-
 }
+
+Sys.sleep(3); D_gamelog2dataframe('ALL')
+Sys.sleep(3); D_gamelog2dataframe('D30')
+Sys.sleep(3); D_gamelog2dataframe('D14')
+Sys.sleep(3); D_gamelog2dataframe('D07')
 
 
 

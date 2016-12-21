@@ -52,4 +52,10 @@ D_syncplayerlist <- function(datarange){
   dbDisconnect(con)
 }
 
+Sys.sleep(3); D_syncplayerlist('Full')
+Sys.sleep(3); D_syncplayerlist('ALL')
+Sys.sleep(3); D_syncplayerlist('D30')
+Sys.sleep(3); D_syncplayerlist('D14')
+Sys.sleep(3); D_syncplayerlist('D07')
+
 
