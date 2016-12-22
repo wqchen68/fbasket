@@ -1,5 +1,6 @@
 # 每天更新 fantasy 名單增加進 biodata
 rm(list=ls())
+library(dplyr)
 source("/home/chengil/R/fbasket/f_dbconnect.R")
 
 sprlist_id <- dbGetQuery(con, "SELECT fbido FROM syncplayerlist WHERE datarange='Full'")
