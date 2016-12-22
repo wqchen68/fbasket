@@ -1,5 +1,7 @@
 rm(list=ls())
 library(rvest)
+library(dplyr)
+library(stringr)
 rw_wb <- NULL
 htmlstr <- read_html('http://www.rotoworld.com/teams/depth-charts/nba.aspx')
 # get playerlist from rotoworld
