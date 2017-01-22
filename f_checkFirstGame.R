@@ -13,7 +13,7 @@ mins  <- minute(gametime)
 hours <- ifelse(hours==12,0,hours)
 
 fileConn <- file("/home/chengil/R/fbasket/update_cron.txt")
-writeLines(paste0(toString(mins)," ",toString(hours)," ","* * * Rscript /home/chengil/R/fbasket/realtimebox.R &> /home/chengil/R/fbasket/realtimebox.log"), fileConn)
+writeLines(paste0(toString(mins)," ",toString(hours)," ","* * * Rscript /home/chengil/R/fbasket/realtimebox.R &> /home/chengil/R/fbasket/realtimebox.log\n0 22-23,0-10 * * * Rscript /home/chengil/R/fbasket/D_updateRWtable.R"), fileConn)
 close(fileConn)
 
 system("crontab /home/chengil/R/fbasket/update_cron.txt")
