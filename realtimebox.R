@@ -4,7 +4,6 @@ library(RMySQL)
 library(rvest)
 library(stringr)
 
-
 source('/home/chengil/R/fbasket/f_dbconnect.R')
 dbGetQuery(con, 'DELETE FROM realtimeeff')
 dbDisconnect(con)
