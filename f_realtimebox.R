@@ -1,5 +1,5 @@
 f_realtimebox <- function(gameid, type){
-  # gameid <- "phoenix-suns-los-angeles-lakers-2016120913"
+  # gameid <- "eastern-conference-east-all-stars-western-conference-west-all-stars-2017021932"
   # type <- 2
   library(dplyr)
   library(tibble)

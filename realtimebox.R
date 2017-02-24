@@ -70,7 +70,6 @@ Sys.sleep(3); source("/home/chengil/R/fbasket/D_FB2biodata.R")
 Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncRWpr.R")
 
 
-
 # # temp query
 # source('/home/chengil/R/fbasket/f_dbconnect.R')
 # dd <- dbGetQuery(con, paste0("SELECT pwftm, pwfta, wftp FROM syncdataframe where datarange='ALL'"))

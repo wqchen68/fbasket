@@ -33,7 +33,9 @@ t_teamName2id <- function(teamName){
                    "nba.t.27" = "was",
                    "nba.t.28" = "tor",
                    "nba.t.29" = "mem",
-                   "nba.t.30" = "cha"
+                   "nba.t.30" = "cha",
+                   "nba.t.31" = "Eas",
+                   "nba.t.32" = "Wes"
                    # "Toronto"      = "tor",
                    # "Boston"       = "bos",
                    # "Brooklyn"     = "bro",
