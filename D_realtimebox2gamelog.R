@@ -8,9 +8,10 @@ thisdate <- Sys.Date()-1
 realdate <- as.Date(opendate:thisdate, origin = '1970-01-01')
 source('/home/chengil/R/fbasket/f_dbconnect.R')
 dbdate <- dbGetQuery(con, "SELECT distinct gamedate FROM allteamlog WHERE season = '2016' order by gamedate")
+dbdate <- c(dbdate$gamedate, as.Date('2017-02-19'))
 dbDisconnect(con)
 
-adddate <- as.Date(setdiff(realdate, as.Date(dbdate$gamedate)), origin = '1970-01-01')
+adddate <- as.Date(setdiff(realdate, as.Date(dbdate)), origin = '1970-01-01')
 source('/home/chengil/R/fbasket/f_realtimebox.R')
 for (i in 1:length(adddate)){
   # sethtml <- readLines(paste0("http://sports.yahoo.com/nba/scoreboard/?date=",adddate[i]),warn=F,encoding="UTF-8")
