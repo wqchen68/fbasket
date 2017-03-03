@@ -45,10 +45,10 @@ f_getbiodata = function(fbido){
   # return(data.frame(bio_data))
   
   biodata <- data.frame(bio_data)
-  source("/home/chengil/R/fbasket/f_dbconnect.R")
-  dbWriteTable(con, 'biodata_copy', biodata, append = T, row.names = F, allow.keywords = T)
-  dbDisconnect(con)
-  
+  # source("/home/chengil/R/fbasket/f_dbconnect.R")
+  # dbWriteTable(con, 'biodata', biodata, append = T, row.names = F, allow.keywords = T)
+  # dbDisconnect(con)
+  return(biodata)
 }
 
 # BioData=[fbido player number fbid position height weight bornD bplace college draftY draftR draftP draftT]
