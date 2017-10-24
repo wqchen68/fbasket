@@ -10,7 +10,7 @@ D_gamelog2dataframe = function(datarange){
   
   source('/home/chengil/R/fbasket/f_dbconnect.R')
   gamelog <- dbGetQuery(con, paste0("SELECT * FROM allgamelog
-                         WHERE season='2016' AND bxgs IS NOT NULL
+                         WHERE season='2017' AND bxgs IS NOT NULL
                          AND TO_DAYS( NOW( ) ) - TO_DAYS( gdate ) <=",days))
   dbDisconnect(con)
 
