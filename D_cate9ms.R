@@ -20,7 +20,7 @@ query <- paste0("
     AVG(bxto)   as pwbxto
   from allgamelog
   where season = ",
-    toString(ifelse(as.integer(format(Sys.Date(), "%m"))<5,
+    toString(ifelse(as.integer(format(Sys.Date(), "%m"))<7,
            as.integer(format(Sys.Date(), "%Y"))-1,
            as.integer(format(Sys.Date(), "%Y"))))
   ," group by fbido
