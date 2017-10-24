@@ -7,18 +7,17 @@ D_syncplayerlist <- function(datarange){
   FULLplayerlistO <- NULL
   PrList <- NULL
   # datarange <- "ALL"
-  datarange_url <- switch(datarange, 
-                          "avg"  = "S_AS_2016",
-                          "ALL"  = "S_S_2016",
-                          "Full" = "S_S_2016",
+  datarange_url <- switch(datarange,
+                          "ALL"  = "S_S_2017",
+                          "Full" = "S_S_2017",
                           "D30"  = "S_L30",
                           "D14"  = "S_L14",
                           "D07"  = "S_L7",
-                          "Y-1"  = "S_S_2015",
-                          "Y-2"  = "S_S_2014")
-  for (i in seq(0, 625, 25)){
+                          "Y-1"  = "S_S_2016",
+                          "Y-2"  = "S_S_2015")
+  for (i in seq(0, 650, 25)){
     # i <- 0
-    sethtml <- readLines(curl(paste0("http://basketball.fantasysports.yahoo.com/nba/8759/players?status=ALL&pos=P&cut_type=33&stat1=", datarange_url, "&myteam=0&sort=OR&sdir=1&count=", toString(i))), warn=F, encoding="UTF-8")
+    sethtml <- readLines(curl(paste0("http://basketball.fantasysports.yahoo.com/nba/18521/players?status=ALL&pos=P&cut_type=33&stat1=", datarange_url, "&myteam=0&sort=OR&sdir=1&count=", toString(i))), warn=F, encoding="UTF-8")
     pagetree <- htmlTreeParse(sethtml, useInternalNodes = TRUE, encoding='UTF-8')
   
     PrList$datarange <- datarange
@@ -30,11 +29,11 @@ D_syncplayerlist <- function(datarange){
     PrList$team    <- dd[,1]
     PrList$position<- dd[,2]
     PrList$injna   <- xpathSApply(pagetree,'//span[@class="ysf-player-status F-injury Fz-xxs Grid-u Lh-xs"]', xmlValue)
-    PrList$orank   <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Nowrap Selected"]', xmlValue) %>% as.numeric()
-    arank          <- xpathSApply(pagetree,'//td[@class="Ta-end Bdrend"]', xmlValue)
+    PrList$orank   <- xpathSApply(pagetree,'//td[@class="Ta-end Nowrap Selected"]', xmlValue) %>% as.numeric()
+    arank          <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Bdrend"]', xmlValue)
     arank          <- matrix(arank,3,) %>% t()
     PrList$arank   <- as.numeric(arank[,1])
-    owned          <- xpathSApply(pagetree,'//td[@class="Alt Ta-end Nowrap Bdrend"]', xmlValue)
+    owned          <- xpathSApply(pagetree,'//td[@class="Ta-end Nowrap Bdrend"]', xmlValue)
     PrList$owned   <- sub("%","",owned)
     
     FULLplayerlistO  <- rbind(FULLplayerlistO, data.frame(PrList))
