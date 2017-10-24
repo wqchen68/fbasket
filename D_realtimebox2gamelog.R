@@ -3,12 +3,12 @@ rm(list=ls())
 library(dplyr)
 library(rvest)
 library(stringr)
-opendate <- as.Date("2016-10-25")
+opendate <- as.Date("2017-10-17")
 thisdate <- Sys.Date()-1
 realdate <- as.Date(opendate:thisdate, origin = '1970-01-01')
 source('/home/chengil/R/fbasket/f_dbconnect.R')
-dbdate <- dbGetQuery(con, "SELECT distinct gamedate FROM allteamlog WHERE season = '2016' order by gamedate")
-dbdate <- c(dbdate$gamedate, as.Date('2017-02-19'))
+dbdate <- dbGetQuery(con, "SELECT distinct gamedate FROM allteamlog WHERE season = '2017' order by gamedate")
+dbdate <- c(dbdate$gamedate) # 要排除的
 dbDisconnect(con)
 
 adddate <- as.Date(setdiff(realdate, as.Date(dbdate)), origin = '1970-01-01')
