@@ -8,26 +8,37 @@ f_getcareerstats <- function(fbido){
   # fbido <- '113'
   # fbido <- '3331'
   # fbido <- '3705'
+  # fbido <- '3248'
   htmlstr <- read_html(paste0("http://sports.yahoo.com/nba/players/", fbido))
   
   source('/home/chengil/R/fbasket/t_fbido2fbid.R')
   fbid = t_fbido2fbid(fbido)
+  
+  parse_time = function(x){
+    x = strsplit(x, ":")
+    unlist(lapply(x, function(y){(as.numeric(y[1])*60+as.numeric(y[2]))/60}))
+  }
   
   careerStats0 <- htmlstr %>%
     html_table(header=FALSE, fill=T) %>%
     tail(1) %>%
     .[[1]] %>%
     filter(grepl("-", X1)) %>%
-    'colnames<-'(c('cseason','cteam','cgame','acmin','acfgm','acfga','ac3ptm','ac3pta','acftm','acfta','acoreb','acdreb','actreb','acast','acto','acst','acblk','acpf','acpts')) %>%
+    'colnames<-'(c('cseason','cteam','cgame','acmin',
+                   'acfgm','acfga','acfgp',
+                   'ac3ptm','ac3pta','ac3ptp',
+                   'acftm','acfta','acftp',
+                   'acoreb','acdreb','actreb','acast','acto','acst','acblk','acpf','acpts')) %>%
+    select(-acfgp, -ac3ptp, -acftp) %>%
     mutate(fbido  = fbido, fbid = fbid,
-           cgame  = as.numeric(cgame),  acmin  = as.numeric(acmin),
-           acfgm  = as.numeric(acfgm),  acfga  = as.numeric(acfga),
-           ac3ptm = as.numeric(ac3ptm), ac3pta = as.numeric(ac3pta),
-           acftm  = as.numeric(acftm),  acfta  = as.numeric(acfta),
-           acoreb = as.numeric(acoreb), acdreb = as.numeric(acdreb), actreb = as.numeric(actreb),
-           acast  = as.numeric(acast),  acto   = as.numeric(acto),
-           acst   = as.numeric(acst),   acblk  = as.numeric(acblk),  acpf   = as.numeric(acpf),
-           acpts  = as.numeric(acpts)) %>%
+           cgame  = as.numeric(gsub(',','',cgame)),  acmin  = parse_time(gsub(',','',acmin)),
+           acfgm  = as.numeric(gsub(',','',acfgm)),  acfga  = as.numeric(gsub(',','',acfga)),
+           ac3ptm = as.numeric(gsub(',','',ac3ptm)), ac3pta = as.numeric(gsub(',','',ac3pta)),
+           acftm  = as.numeric(gsub(',','',acftm)),  acfta  = as.numeric(gsub(',','',acfta)),
+           acoreb = as.numeric(gsub(',','',acoreb)), acdreb = as.numeric(gsub(',','',acdreb)), actreb = as.numeric(gsub(',','',actreb)),
+           acast  = as.numeric(gsub(',','',acast)),  acto   = as.numeric(gsub(',','',acto)),
+           acst   = as.numeric(gsub(',','',acst)),   acblk  = as.numeric(gsub(',','',acblk)),  acpf   = as.numeric(gsub(',','',acpf)),
+           acpts  = as.numeric(gsub(',','',acpts))) %>%
     mutate(cmin  = acmin/cgame,
            cfgm  = acfgm/cgame,  cfga  = acfga/cgame,  cfgp  = acfgm/acfga,
            c3ptm = ac3ptm/cgame, c3pta = ac3pta/cgame, c3ptp = ac3ptm/ac3pta,
@@ -83,7 +94,10 @@ f_getcareerstats <- function(fbido){
   careerStats$cteam <- careerStats$cteam %>% 
     add_prime() %>% 
     add_prime()
-  
+
+  careerStats <- careerStats %>%
+    filter(cseason %in% c('2015-16', '2016-17'))
+    
   source("/home/chengil/R/fbasket/f_dbconnect.R")
   dbWriteTable(con, 'careerstats_copy', careerStats, append = T, row.names = F, allow.keywords = T)
   dbDisconnect(con)

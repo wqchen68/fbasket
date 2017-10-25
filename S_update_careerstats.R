@@ -4,7 +4,8 @@ library(dplyr)
 library(RMySQL)
 
 source('/home/chengil/R/fbasket/f_dbconnect.R')
-all_fbido <- dbGetQuery(con, "SELECT fbido FROM biodata")
+# all_fbido <- dbGetQuery(con, "SELECT fbido FROM biodata")
+all_fbido <- dbGetQuery(con, "SELECT fbido FROM syncplayerlist WHERE datarange = 'Full'")
 dbDisconnect(con)
 
 source("/home/chengil/R/fbasket/f_getcareerstats.R")
