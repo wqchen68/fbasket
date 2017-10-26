@@ -25,6 +25,36 @@ careerstats <- lapply(all_fbido$fbido, function(x){
   })
 })
 
+# ### SQL view for integrate careerstats_origin and careerstats_copy ###
+# create view careerstats as
+# select *
+# from careerstats_origin
+# union
+# select `fbido`, `fbid`, `cseason`,
+#   case cteam
+#   when 'GS'  then 'GS'
+#   when 'LAC' then 'LAC'
+#   when 'LAL' then 'LAL'
+#   when 'NO'  then 'NO'
+#   when 'NY'  then 'NY'
+#   when 'OKC' then 'OKC'
+#   when 'SA'  then 'SA'
+#   when 'GS\''  then 'GS\''
+#   when 'LAC\'' then 'LAC\''
+#   when 'LAL\'' then 'LAL\''
+#   when 'NO\''  then 'NO\''
+#   when 'NY\''  then 'NY\''
+#   when 'OKC\'' then 'OKC\''
+#   when 'SA\''  then 'SA\''		
+#   else CONCAT(UCASE(LEFT(cteam, 1)), LCASE(SUBSTRING(cteam, 2)))
+#   end as cteam, 
+#   `cgame`,`cmin`,`cfgm`,`cfga`,`cfgp`,`c3ptm`,`c3pta`,`c3ptp`,`cftm`,`cfta`,`cftp`,`coreb`,`cdreb`,`ctreb`,`cast`,`cto`,`cst`,`cblk`,`cpf`,`cpts`,`catr`,`ceff`,
+#   `ceff36`,`acmin`,`acfgm`,`acfga`,`ac3ptm`,`ac3pta`,`acftm`,`acfta`,`acoreb`,`acdreb`,`actreb`,`acast`,`acto`,`acst`,`acblk`,`acpf`,`acpts`,
+#   `dataorder`,`updatetime`
+# from careerstats_copy
+# where cseason = '2016-17'
+
+
 # SQL - check
 # select a.fbido, a.fbid, b.fbido, b.fbid, b.cnt
 # from biodata a
