@@ -62,12 +62,12 @@ close(fileConn)
 system("crontab /home/chengil/R/fbasket/update_cron.txt")
 
 
-Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncplayerlist.R")
-Sys.sleep(3); source("/home/chengil/R/fbasket/D_FB2biodata.R")
-Sys.sleep(3); source("/home/chengil/R/fbasket/D_realtimebox2gamelog.R")
-Sys.sleep(3); source("/home/chengil/R/fbasket/D_cate9ms.R")
-Sys.sleep(3); source("/home/chengil/R/fbasket/D_gamelog2dataframe.R")
-Sys.sleep(3); source("/home/chengil/R/fbasket/D_syncRWpr.R")
+Sys.sleep(3); print("=== D_syncplayerlist.R ==="); source("/home/chengil/R/fbasket/D_syncplayerlist.R")
+Sys.sleep(3); print("=== D_FB2biodata.R ==="); source("/home/chengil/R/fbasket/D_FB2biodata.R")
+Sys.sleep(3); print("=== D_realtimebox2gamelog.R ==="); source("/home/chengil/R/fbasket/D_realtimebox2gamelog.R")
+Sys.sleep(3); print("=== D_cate9ms.R ==="); source("/home/chengil/R/fbasket/D_cate9ms.R")
+Sys.sleep(3); print("=== D_gamelog2dataframe.R ==="); source("/home/chengil/R/fbasket/D_gamelog2dataframe.R")
+Sys.sleep(3); print("=== D_syncRWpr.R ==="); source("/home/chengil/R/fbasket/D_syncRWpr.R")
 
 
 # # temp query
