@@ -8,10 +8,14 @@ D_gamelog2dataframe = function(datarange){
          "D14" = 14,
          "D07" = 7)
   
+  # datarange <- "Y-1"
+  
   source('/home/chengil/R/fbasket/f_dbconnect.R')
   gamelog <- dbGetQuery(con, paste0("SELECT * FROM allgamelog
                          WHERE season='2017' AND bxgs IS NOT NULL
                          AND TO_DAYS( NOW( ) ) - TO_DAYS( gdate ) <=",days))
+  # gamelog <- dbGetQuery(con, paste0("SELECT * FROM allgamelog
+  #                        WHERE season='2016' AND bxgs IS NOT NULL"))  
   dbDisconnect(con)
 
   # source('/home/chengil/R/fansboard/f_dbconnect.R')
