@@ -89,6 +89,7 @@ f_realtimebox <- function(gameid, type){
     ##### BoxScroeTM #####
     BoxScroeTM$team    <- team
     BoxScroeTM$season  <- ifelse(as.integer(substr(gamedate,5,6)) < 7,as.character(as.integer(substr(gamedate,1,4))-1),substr(gamedate,1,4))
+    # BoxScroeTM$season <- '2016p'
     BoxScroeTM$gamedate<- gamedate
     BoxScroeTM$gameid  <- gameid
     BoxScroeTM$oppo    <- c(paste0("@", BoxScroeTM$team[2]), BoxScroeTM$team[1])
@@ -112,7 +113,7 @@ f_realtimebox <- function(gameid, type){
     BoxScroeTM$bx3pta <- sapply(boxtm$`3pt`, parsePtg_d)
     BoxScroeTM$bx3ptp <- BoxScroeTM$bx3ptm/BoxScroeTM$bx3pta*100
     BoxScroeTM$bxftm  <- sapply(boxtm$FT, parsePtg_n)
-    BoxScroeTM$bxfta  <- sapply(boxtm$FT, parsePtg_n)
+    BoxScroeTM$bxfta  <- sapply(boxtm$FT, parsePtg_d)
     BoxScroeTM$bxftp  <- BoxScroeTM$bxftm/BoxScroeTM$bxfta*100
     BoxScroeTM$bxoreb <- as.integer(boxtm$ORPG)
     BoxScroeTM$bxdreb <- as.integer(boxtm$DRPG)
@@ -143,6 +144,7 @@ f_realtimebox <- function(gameid, type){
     startfive2[1:5] <- c('F','F','C','G','G')
     
     BoxScroePR$season    <- season
+    # BoxScroePR$season    <- '2016p'
     BoxScroePR$gamedate  <- gamedate
     BoxScroePR$gameid    <- gameid
     BoxScroePR$team      <- rep(team,c(nrow(boxA),nrow(boxB)))
