@@ -4,7 +4,7 @@ library(dplyr)
 source("/home/chengil/R/fbasket/f_dbconnect.R")
 dbGetQuery(con, "TRUNCATE cate9ms")
 query <- paste0("
-  select 
+  select
     AVG(bxfga) as pwfga,
     AVG(bxfta) as pwfta,
     SUM(bxfgm) as wfgm,  SUM(bxfga) as wfga,
@@ -25,6 +25,25 @@ query <- paste0("
            as.integer(format(Sys.Date(), "%Y"))))
   ," group by fbido
 ")
+
+# query <- paste0("
+#                 select 
+#                 AVG(bxfga) as pwfga,
+#                 AVG(bxfta) as pwfta,
+#                 SUM(bxfgm) as wfgm,  SUM(bxfga) as wfga,
+#                 SUM(bxftm) as wftm,  SUM(bxfta) as wfta,
+#                 SUM(bxfgm)/SUM(bxfga) as pwfgp,
+#                 SUM(bxftm)/SUM(bxfta) as pwftp,
+#                 AVG(bx3ptm) as pw3ptm,
+#                 AVG(bxpts)  as pwpts,
+#                 AVG(bxtreb) as pwtreb,
+#                 AVG(bxast)  as pwast,
+#                 AVG(bxst)   as pwst,
+#                 AVG(bxblk)  as pwbxblk,
+#                 AVG(bxto)   as pwbxto
+#                 from allgamelog
+#                 where season = '2015' group by fbido")
+
 agg_pr <- dbGetQuery(con, query)
 agg_pr$pwfgp <- (agg_pr$pwfgp - sum(agg_pr$wfgm, na.rm = T)/sum(agg_pr$wfga, na.rm = T))*agg_pr$pwfga
 agg_pr$pwftp <- (agg_pr$pwftp - sum(agg_pr$wftm, na.rm = T)/sum(agg_pr$wfta, na.rm = T))*agg_pr$pwfta
