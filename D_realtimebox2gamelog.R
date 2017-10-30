@@ -3,11 +3,26 @@ rm(list=ls())
 library(dplyr)
 library(rvest)
 library(stringr)
-opendate <- as.Date("2017-10-17")
-thisdate <- Sys.Date()-1
+opendate <- as.Date("2017-10-17") #2017-18 open
+# opendate <- as.Date("2017-04-15") #2016-17 playoff open
+# opendate <- as.Date("2016-10-25") #2016-17 open
+# opendate <- as.Date("2016-04-16") #2015-16 playoff open
+# opendate <- as.Date("2015-10-27") #2015-16 open
+# opendate <- as.Date("2015-04-18") #2014-15 playoff open
+# opendate <- as.Date("2014-10-28") #2014-15 open
+
+thisdate <- Sys.Date()-1 #now # thisdate <- as.Date('2018-04-11') #2017 end
+# thisdate <- as.Date('2017-06-12') #2016-17 playoff end, 2017-02-19 ASG
+# thisdate <- as.Date('2017-04-12') #2016-17 end
+# thisdate <- as.Date('2016-06-19') #2015-16 playoff end, 2016-02-14 ASG
+# thisdate <- as.Date('2016-04-13') #2015-16 end
+# thisdate <- as.Date('2015-06-16') #2014-15 playoff end, 2015-02-15 ASG
+# thisdate <- as.Date('2015-04-15') #2014-15 end
+
+
 realdate <- as.Date(opendate:thisdate, origin = '1970-01-01')
 source('/home/chengil/R/fbasket/f_dbconnect.R')
-dbdate <- dbGetQuery(con, "SELECT distinct gamedate FROM allteamlog WHERE season = '2017' order by gamedate")
+dbdate <- dbGetQuery(con, "SELECT distinct gamedate FROM allteamlog WHERE season = '2017' or season = '2017asg' order by gamedate")
 dbdate <- c(dbdate$gamedate) # 要排除的
 dbDisconnect(con)
 
@@ -55,11 +70,11 @@ for (i in 1:length(adddate)){
     dbWriteTable(con, 'allgamelog', BoxScroePRALL, append = T, row.names = F, allow.keywords = T)
     dbDisconnect(con)
   }
-  
 }
 
 
-
-
+# 同一天出現在兩場球賽（通常發生在交易後第一天）
+# BoxScroePRALL <- BoxScroePRALL %>%
+#   filter(fbid != 'Brandan-Wright' | gameid != 'boston-celtics-indiana-pacers-2015010911')
 
 
