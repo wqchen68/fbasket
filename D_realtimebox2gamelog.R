@@ -77,4 +77,25 @@ for (i in 1:length(adddate)){
 # BoxScroePRALL <- BoxScroePRALL %>%
 #   filter(fbid != 'Brandan-Wright' | gameid != 'boston-celtics-indiana-pacers-2015010911')
 
+# check script
+# select season, count(*)
+# from allteamlog
+# group by season
+# 
+# select season, count(*)
+# from (
+#   select distinct season, gameid
+#   from allgamelog
+#   group by gameid
+# ) a
+# group by season
+# 
+# select tt, count(*)
+# from (
+#   select gameid, round(sum(bxmin)/10,1) as tt
+#   from allgamelog
+#   where season = '2016'
+#   group by gameid
+# ) a
+# group by tt
 
