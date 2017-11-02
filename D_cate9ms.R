@@ -56,7 +56,7 @@ cate9ms$percentage[1]  <- sum(agg_pr$wfgm, na.rm = T)/sum(agg_pr$wfga, na.rm = T
 cate9ms$percentage[2]  <- sum(agg_pr$wftm, na.rm = T)/sum(agg_pr$wfta, na.rm = T)
 
 cate9ms <- data.frame(cate9ms)
-dbWriteTable(con, 'cate9ms', cate9ms, append = T, row.names = F, allow.keywords = T)
+dbWriteTable(con, 'cate9ms', cate9ms, append = T, row.names = F)
 dbDisconnect(con)
 
 

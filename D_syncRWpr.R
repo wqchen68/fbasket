@@ -45,7 +45,7 @@ df_rw_add_fn <- df_rw_add %>%
   mutate(report=NA, impact=NA, date=NA, info=NA)
 
 source("/home/chengil/R/fbasket/f_dbconnect.R")
-dbWriteTable(con, 'rwtable', df_rw_add_fn, append = T, row.names = F, allow.keywords = T)
+dbWriteTable(con, 'rwtable', df_rw_add_fn, append = T, row.names = F)
 dbDisconnect(con)
 
 
