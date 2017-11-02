@@ -13,7 +13,7 @@ source("/home/chengil/R/fbasket/f_getbiodata.R")
 biodata <- do.call(rbind, lapply(diff_bio, f_getbiodata)) %>% data.frame()
 
 source("/home/chengil/R/fbasket/f_dbconnect.R")
-dbWriteTable(con, 'biodata', biodata, append = T, row.names = F, allow.keywords = T)
+dbWriteTable(con, 'biodata', biodata, append = T, row.names = F)
 dbDisconnect(con)
 
 
