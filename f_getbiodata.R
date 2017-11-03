@@ -1,36 +1,65 @@
 f_getbiodata = function(fbido){
-  library(XML)
-  library(RCurl)
+  # library(XML)
+  # library(RCurl)
   library(RMySQL)
   library(rvest)
   bio_data <- NULL
   # fbido <- '3704' #normal
-  # fbido <- '1250' #no number
+  # fbido <- '1250', '5671' #no number
   # fbido <- '2874' #no nmber, position
   # fbido <- '5852'
-  sethtml  <- readLines(paste0("https://sports.yahoo.com/nba/players/", fbido),warn=F,encoding = "UTF-8")
-  pagetree <- htmlTreeParse(sethtml, useInternalNodes = TRUE, encoding='UTF-8')
+
+  # sethtml  <- readLines(paste0("https://sports.yahoo.com/nba/players/", fbido),warn=F,encoding = "UTF-8")
+  # pagetree <- htmlTreeParse(sethtml, useInternalNodes = TRUE, encoding='UTF-8')
+  # bio_data$fbido  <- fbido
+  # bio_data$player <- xpathSApply(pagetree,'//*[@id="Col1-0-Player-Proxy"]/div/div[1]/div[2]/h1/span',xmlValue)
+  # source('/home/chengil/R/fbasket/t_player2fbid.R')
+  # bio_data$fbid <- t_player2fbid(bio_data$player)
+  # numpos <- xpathSApply(pagetree,'//*[@id="Col1-0-Player-Proxy"]/div/div[1]/div[2]/div/div[1]/div',xmlValue) %>% strsplit(",") %>% unlist()
+  # if (length(numpos)==3){
+  #   bio_data$number   <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
+  #   bio_data$position <- numpos[2] %>% trimws("left")
+  # }else if(length(numpos)==2){
+  #   bio_data$number   <- NULL
+  #   bio_data$position <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
+  # }else{
+  #   bio_data$number   <- NULL
+  #   bio_data$position <- NULL
+  # }
+  # fbidnp <- as.data.frame(bio_data, stringsAsFactors = F)
+
+  # new version: use rvest
   bio_data$fbido  <- fbido
-  bio_data$player <- xpathSApply(pagetree,'//*[@id="Col1-0-Player-Proxy"]/div/div[1]/div[2]/h1/span',xmlValue)
+  
+  setUrl <- paste0('https://sports.yahoo.com/nba/players/', fbido)
+  html_str <- setUrl %>% read_html()
+
+  bio_data$player <- html_str %>%
+    html_nodes(xpath = "//*[@class='Fw(b) Mbot(4px) Fz(30px)']") %>% 
+    html_text()
+  
   source('/home/chengil/R/fbasket/t_player2fbid.R')
   bio_data$fbid <- t_player2fbid(bio_data$player)
-  numpos <- xpathSApply(pagetree,'//*[@id="Col1-0-Player-Proxy"]/div/div[1]/div[2]/div/div[1]/div',xmlValue) %>% strsplit(",") %>% unlist()
+    
+  numpos <- html_str %>%
+    html_nodes(xpath = "//*[@class='Row Mb(15px) Fz(14px)']") %>% 
+    html_text() %>%
+    strsplit(",") %>% 
+    unlist()
+  
   if (length(numpos)==3){
     bio_data$number   <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
-    bio_data$position <- numpos[2] %>% trimws("left")
+    bio_data$position <- substring(numpos[2], 2)
   }else if(length(numpos)==2){
     bio_data$number   <- NULL
-    bio_data$position <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
+    bio_data$position <- substring(numpos[1], 2)
   }else{
     bio_data$number   <- NULL
     bio_data$position <- NULL
   }
   fbidnp <- as.data.frame(bio_data, stringsAsFactors = F)
-
-  # new version: use rvest
-  setUrl <- paste0('https://sports.yahoo.com/nba/players/', fbido)
-  hwbcd <- setUrl %>% 
-    read_html() %>% 
+  
+  hwbcd <- html_str %>%
     html_nodes(xpath = "//*[@class='Fz(13px) Lh(1.8) Maw(600px)']//*[@class='IbBox Pend(40px) Miw(35%)']") %>% 
     html_text() %>%
     strsplit(., split=": ") %>%
