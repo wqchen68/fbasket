@@ -4,8 +4,8 @@ f_getbiodata = function(fbido){
   library(RMySQL)
   library(rvest)
   bio_data <- NULL
-  # fbido <- '3704' #normal
-  # fbido <- '1250', '5671' #no number
+  # fbido <- '4176' #normal
+  # fbido <- '1250', '4176' #no number
   # fbido <- '2874' #no nmber, position
   # fbido <- '5852'
 
@@ -49,10 +49,10 @@ f_getbiodata = function(fbido){
   
   if (length(numpos)==3){
     bio_data$number   <- numpos[1] %>% strsplit("#") %>% unlist() %>% tail(1)
-    bio_data$position <- substring(numpos[2], 2)
-  }else if(length(numpos)==2){
+    bio_data$position <- substring(numpos[2], 2) #there is a freaky string front position code
+  }else if(length(numpos)==2){ #just only (position, team)
     bio_data$number   <- NULL
-    bio_data$position <- substring(numpos[1], 2)
+    bio_data$position <- numpos[1] #there is no freaky string
   }else{
     bio_data$number   <- NULL
     bio_data$position <- NULL
