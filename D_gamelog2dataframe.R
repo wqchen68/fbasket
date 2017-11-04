@@ -102,7 +102,7 @@ D_gamelog2dataframe = function(datarange){
   
   source("/home/chengil/R/fbasket/f_dbconnect.R")
   dbGetQuery(con, paste0("DELETE FROM syncdataframe WHERE datarange='", datarange, "'"))
-  dbWriteTable(con, 'syncdataframe', df_all, append = T, row.names = F, allow.keywords = T)
+  dbWriteTable(con, 'syncdataframe', df_all, append = T, row.names = F)
   dbDisconnect(con)
 }
 
